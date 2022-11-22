@@ -15,14 +15,39 @@ class ProductsSeeder extends Seeder
      */
     public function run()
     {
-        Product::create([
-
-            'name' => 'Admin',
-
-            'email' => 'admin@admin.com',
-
-            'password' => bcrypt('123456'),
-
-        ]);
+        $products = [
+            [
+                'name' => 'Producto 1',
+                'price' => '123.45',
+                'tax' => '5',
+            ],
+            [
+                'name' => 'Producto 2',
+                'price' => '45.65',
+                'tax' => '15',
+            ],
+            [
+                'name' => 'Producto 3',
+                'price' => '39.73',
+                'tax' => '12',
+            ],
+            [
+                'name' => 'Producto 4',
+                'price' => '250.00',
+                'tax' => '8',
+            ],
+            [
+                'name' => 'Producto 5',
+                'price' => '59.35',
+                'tax' => '10',
+            ],
+        ];
+        foreach ($products as $product) {
+            Product::create([
+                'name' => $product['name'],
+                'price' => $product['price'],
+                'tax' => $product['tax'],
+            ]);
+        }
     }
 }
