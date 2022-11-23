@@ -14,9 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
-Route::resource('products', App\Http\Controllers\ProductController::class);
+Route::resource('products', App\Http\Controllers\ProductController::class)->middleware('auth');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->middleware('auth.admin')->name('admin.index');
+Route::get('/superadmin', [App\Http\Controllers\SuperAdminController::class, 'index'])->middleware('auth.super')->name('superadmin.index');
