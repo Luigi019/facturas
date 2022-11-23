@@ -13,25 +13,27 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                        @guest
+                        
                                 @if (auth()->user()->role == 'SuperAdmin') 
                                  Productos 
                      <a href="{{ route('products.index') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                  Ver Productos
                                 </a>
-                             @endif
-                             @if (auth()->user()->role == 'Admin') 
+                                Generar
+                     <a href="{{ route('products.index') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                 Facturas
+                                </a>
+                             @elseif (auth()->user()->role == 'Admin') 
                                  Generar
                      <a href="{{ route('products.index') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                  Facturas
                                 </a>
-                             @endif
                                 @else 
                                   Comprar 
                      <a href="{{ route('products.index') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                  Productos
                                 </a>
-                        @endguest
+                        @endif
                    
                 </div>
             </div>

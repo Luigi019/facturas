@@ -77,6 +77,12 @@ class ProductController extends Controller
         return view('product.edit', compact('product'));
     }
 
+    public function purchase($id)
+    {
+        $product = Product::find($id);
+
+        return view('purchase.create', compact('product'));
+    }
     /**
      * Update the specified resource in storage.
      *

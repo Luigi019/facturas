@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Product
+    Purchase
 @endsection
 
 @section('content')
@@ -13,11 +13,11 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Product') }}
+                                {{ __('Purchase') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('products.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                <a href="{{ route('purchases.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
                               </div>
@@ -36,36 +36,33 @@
                                     <tr>
                                         <th>No</th>
                                         
-										<th>Name</th>
-										<th>Price</th>
-										<th>Tax</th>
+										<th>User Id</th>
+										<th>Product Id</th>
+										<th>Cardnumber</th>
+										<th>Cvc</th>
+										<th>Expirationdate</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($products as $product)
+                                    @foreach ($purchases as $purchase)
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-											<td>{{ $product->name }}</td>
-											<td>{{ $product->price }}</td>
-											<td>{{ $product->tax }}</td>
+											<td>{{ $purchase->user_id }}</td>
+											<td>{{ $purchase->product_id }}</td>
+											<td>{{ $purchase->cardNumber }}</td>
+											<td>{{ $purchase->cvc }}</td>
+											<td>{{ $purchase->expirationDate }}</td>
 
                                             <td>
-                                                <form action="{{ route('products.destroy',$product->id) }}" method="POST">
-                                                    @if (auth()->user()->role == 'SuperAdmin') 
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('products.show',$product->id) }}"><i class="fa fa-fw fa-eye"></i> Mostrar</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('products.edit',$product->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
+                                                <form action="{{ route('purchases.destroy',$purchase->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('purchases.show',$purchase->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('purchases.edit',$purchase->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Eliminar</button>
-                                                    @endif
-                                                     </form>
-                                                    <form action="{{ route('products.purchase',$product->id) }}" method="POST">
-                                                    @csrf
-                                                        <button type="submit"  class="btn btn-sm btn-info"><i class="fas fa-cart-plus"></i> Comprar</button>
-                                                    
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -75,7 +72,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $products->links() !!}
+                {!! $purchases->links() !!}
             </div>
         </div>
     </div>

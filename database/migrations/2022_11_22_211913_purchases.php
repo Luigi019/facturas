@@ -13,7 +13,15 @@ class Purchases extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('purchases', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->references('id')->on('users')->onUpdate('cascade');
+            $table->foreignId('product_id')->references('id')->on('products')->onUpdate('cascade');
+            $table->string('cardNumber');
+            $table->string('cvc');
+            $table->timestamp('expirationDate');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +31,6 @@ class Purchases extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('purchases');
     }
 }
